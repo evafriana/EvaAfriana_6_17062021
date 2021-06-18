@@ -1,0 +1,22 @@
+.main {
+  &__title {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    font-weight: lighter;
+
+    @media screen and (min-width: map-get($breakpoints, tablet)) {
+      right: 50px;
+      top: 42px;
+    }
+  }
+
+  &__content {
+    text-align: center;
+    margin: 2.5rem 0;
+
+    @media screen and (min-width: map-get($breakpoints, tablet)) {
+      margin: 2.5rem 1rem;
+    }
+  }
+}
