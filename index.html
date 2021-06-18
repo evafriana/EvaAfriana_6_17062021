@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FishEye</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header" aria-label="banner">
+        <a href="/">
+          <img
+            class="header__img"
+            src="assets/images/logo.png"
+            alt="Fisheye Home Page"
+          />
+        </a>
+        <nav
+          class="header__nav"
+          role="navigation"
+          aria-label="photographer categories"
+        >
+          <ul class="header__nav__list" tabindex="0" aria-label="Tag">
+            <li class="header__nav__item tags"><a>#Portrait</a></li>
+            <li class="header__nav__item tags"><a>#Art</a></li>
+            <li class="header__nav__item tags"><a>#Fashion</a></li>
+            <li class="header__nav__item tags"><a>#Architecture</a></li>
+            <li class="header__nav__item tags"><a>#Travel</a></li>
+            <li class="header__nav__item tags"><a>#Sport</a></li>
+            <li class="header__nav__item tags"><a>#Animals</a></li>
+            <li class="header__nav__item tags"><a>#Events</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main class="main">
+        <h1 class="main__title">Nos photographes</h1>
+        <section class="main__content" id="photographers"></section>
+      </main>
+
+      <script type="module" src="js/index.js"></script>
+    </div>
+  </body>
+</html>
