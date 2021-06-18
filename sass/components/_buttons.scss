@@ -12,20 +12,20 @@
   background-color: $color-primary;
   color: #fff;
   z-index: 5;
+  width: 200px;
+  font-size: 20px;
 
-  &__contact {
-    width: 200px;
-
-    @media screen and (min-width: map-get($breakpoints, tablet)) {
-      width: 180px;
-      height: 60px;
-    }
+  @media screen and (min-width: map-get($breakpoints, tablet)) {
+    width: 180px;
+    height: 60px;
   }
 
-  .contact {
-    padding: 0.5rem;
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
+  &__primary {
+    padding: 1rem;
+  }
+
+  &__profil {
+    margin-left: -20rem;
+    margin-top: 0.5rem;
   }
 }
