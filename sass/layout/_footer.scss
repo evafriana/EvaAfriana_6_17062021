@@ -1,0 +1,13 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 90%;
+  text-align: center;
+  text-align: -webkit-center;
+  margin-bottom: 1rem;
+
+  @media screen and (min-width: map-get($breakpoints, tablet)) {
+    margin-bottom: 0;
+    text-align: right;
+  }
+}
