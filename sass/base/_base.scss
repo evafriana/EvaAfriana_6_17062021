@@ -29,3 +29,20 @@ a {
 li {
   list-style-type: none;
 }
+
+.desktop {
+  display: none;
+}
+
+.mobile {
+  display: block;
+}
+
+@media screen and (min-width: map-get($breakpoints, tablet)) {
+  .desktop {
+    display: block;
+  }
+  .mobile {
+    display: none;
+  }
+}

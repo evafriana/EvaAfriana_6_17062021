@@ -1,0 +1,111 @@
+.container-mobile {
+  padding: 1rem;
+  @media screen and (min-width: map-get($breakpoints, tablet)) {
+    padding: 2rem 4rem;
+  }
+}
+
+.photographer {
+  margin: 1.5rem 0;
+
+  @media screen and (min-width: map-get($breakpoints, tablet)) {
+    padding: 4rem 3rem;
+    background-color: $color-secondary-bg;
+  }
+
+  h2 {
+    @media screen and (min-width: map-get($breakpoints, tablet)) {
+      font-size: 56px;
+    }
+  }
+
+  h4 {
+    @media screen and (min-width: map-get($breakpoints, tablet)) {
+      font-size: 20px;
+    }
+  }
+
+  p {
+    color: $color-text;
+  }
+
+  &__profil {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    line-height: 1.4;
+
+    &__img {
+      @include img-profil;
+      width: 120px;
+      height: 120px;
+      @media screen and (min-width: map-get($breakpoints, tablet)) {
+        width: 170px;
+        height: 170px;
+      }
+    }
+
+    &__info {
+      span {
+        line-height: 2;
+      }
+    }
+  }
+
+  &__artworks {
+    margin: 3rem 0;
+    color: $color-primary;
+
+    @media screen and (min-width: map-get($breakpoints, tablet)) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 1rem 5rem;
+      height: 335px;
+    }
+
+    img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: $border-radius;
+      object-position: top;
+
+      @media screen and (min-width: map-get($breakpoints, tablet)) {
+        height: 335px;
+      }
+    }
+
+    &__info {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      padding: 0.7rem;
+    }
+
+    &__title {
+      color: $color-primary;
+    }
+  }
+}
+
+.trier {
+  display: flex;
+  align-items: center;
+
+  p {
+    padding-right: 2rem;
+    font-weight: bold;
+  }
+}
+
+.favorite {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  background-color: $color-secondary;
+  padding: 1rem;
+  border-radius: 10px 10px 0 0;
+  float: right;
+  margin-right: -3rem;
+}
