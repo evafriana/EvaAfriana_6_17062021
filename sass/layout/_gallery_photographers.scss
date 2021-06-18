@@ -1,0 +1,29 @@
+#photographers {
+  > div {
+    margin: 3rem 0;
+  }
+
+  @media screen and (min-width: map-get($breakpoints, tablet)) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.photographers {
+  &__info {
+    line-height: 1.7;
+  }
+
+  &__profil {
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__price {
+    color: $color-text;
+    margin-bottom: 0.5rem;
+  }
+}
