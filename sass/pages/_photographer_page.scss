@@ -1,6 +1,6 @@
 .container-mobile {
   padding: 1rem;
-  @media screen and (min-width: map-get($breakpoints, tablet)) {
+  @media screen and (min-width: map-get($breakpoints, large-tablet)) {
     padding: 2rem 4rem;
   }
 }
@@ -8,13 +8,13 @@
 .photographer {
   margin: 1.5rem 0;
 
-  @media screen and (min-width: map-get($breakpoints, tablet)) {
+  @media screen and (min-width: map-get($breakpoints, large-tablet)) {
     padding: 4rem 3rem;
     background-color: $color-secondary-bg;
   }
 
   h2 {
-    @media screen and (min-width: map-get($breakpoints, tablet)) {
+    @media screen and (min-width: map-get($breakpoints, large-tablet)) {
       font-size: 56px;
     }
   }

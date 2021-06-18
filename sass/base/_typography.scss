@@ -9,7 +9,7 @@ body {
     font-family: $font-title;
     color: $color-primary;
 
-    @media screen and (min-width: map-get($breakpoints, tablet)) {
+    @media screen and (min-width: map-get($breakpoints, large-tablet)) {
       font-size: 32px;
     }
   }
