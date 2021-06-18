@@ -3,7 +3,7 @@
     margin: 3rem 0;
   }
 
-  @media screen and (min-width: map-get($breakpoints, tablet)) {
+  @media screen and (min-width: map-get($breakpoints, large-tablet)) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }

@@ -15,7 +15,7 @@
   width: 200px;
   font-size: 20px;
 
-  @media screen and (min-width: map-get($breakpoints, tablet)) {
+  @media screen and (min-width: map-get($breakpoints, large-tablet)) {
     width: 180px;
     height: 60px;
   }
@@ -25,7 +25,14 @@
   }
 
   &__profil {
-    margin-left: -20rem;
-    margin-top: 0.5rem;
+    @media screen and (min-width: map-get($breakpoints, tablet)) {
+      margin-left: -5vw;
+      margin-top: 0.5rem;
+    }
+
+    @media screen and (min-width: map-get($breakpoints, desktop)) {
+      margin-left: -20rem;
+      margin-top: 0.5rem;
+    }
   }
 }

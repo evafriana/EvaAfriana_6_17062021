@@ -4,10 +4,12 @@
     top: 30px;
     right: 20px;
     font-weight: lighter;
+    right: 20px;
+    top: 30px;
 
-    @media screen and (min-width: map-get($breakpoints, tablet)) {
+    @media screen and (min-width: map-get($breakpoints, large-tablet)) {
       right: 50px;
-      top: 42px;
+      top: -110px;
     }
   }
 
@@ -15,7 +17,7 @@
     text-align: center;
     margin: 2.5rem 0;
 
-    @media screen and (min-width: map-get($breakpoints, tablet)) {
+    @media screen and (min-width: map-get($breakpoints, large-tablet)) {
       margin: 2.5rem 1rem;
     }
   }
