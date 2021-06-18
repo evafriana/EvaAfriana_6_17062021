@@ -1,0 +1,6 @@
+.vscode
+.sass-cache
+node_modules
+package-lock.json
+test.html
+.DS_Store
