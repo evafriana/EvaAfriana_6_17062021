@@ -56,6 +56,10 @@
     margin: 3rem 0;
     color: $color-primary;
 
+    div {
+      align-self: center;
+    }
+
     @media screen and (min-width: map-get($breakpoints, tablet)) {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -73,6 +77,10 @@
       @media screen and (min-width: map-get($breakpoints, tablet)) {
         height: 335px;
       }
+    }
+
+    video {
+      width: 100%;
     }
 
     &__info {

@@ -11,11 +11,16 @@ export const initPhotographer = () => {
 };
 
 const appendData = (response) => {
-  const photographerId = getParam("id");
+  appendProfil(response.photographers);
 
-  const { photographers } = response;
+  appendMedia(response.media);
+};
+
+const appendProfil = (photographers) => {
+  const photographerId = parseInt(getParam("id"));
+
   const photographer = photographers.find((photographer) => {
-    return photographer.id === parseInt(photographerId);
+    return photographer.id === photographerId;
   });
 
   const photographerProfil = document.querySelectorAll(".photographer");
@@ -34,7 +39,7 @@ const appendData = (response) => {
       <span class="contact">Contactez-moi</span>
     </button>
     <img
-      src="./assets/images/photographers/MimiKeel.jpg"
+      src="./assets/images/photographers/${photographer.portrait}"
       alt=""
       class="photographer__profil__img"
     />
@@ -42,5 +47,69 @@ const appendData = (response) => {
     ${tags(photographer.tags)}
       `;
     element.appendChild(div);
+  });
+};
+
+const checkFileExist = (urlToFile) => {
+  const xhr = new XMLHttpRequest();
+  xhr.open("HEAD", urlToFile, false);
+  xhr.send();
+
+  if (xhr.status == "404") {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+const appendMedia = (media) => {
+  const photographerId = parseInt(getParam("id"));
+
+  const photographerMedias = document.querySelector(".photographer__artworks");
+
+  media.forEach((element) => {
+    if (element.photographerId === photographerId) {
+      const div = document.createElement("div");
+      const path = "assets/images/medias/";
+      let artWork = `
+        <a>
+          <img
+            src="${path}not_found.png"
+            alt=""
+          />
+        </a>
+      `;
+
+      if (element.video) {
+        if (checkFileExist(`${path}${element.video}`)) {
+          artWork = `
+          <a><video controls>
+            <source src="${path}${element.video}" type="video/mp4">
+            <source src="${path}${element.video}" type="video/ogg">
+            Your browser does not support the video tag.
+          </video></a>
+        `;
+        }
+      } else if (element.image) {
+        if (checkFileExist(`${path}${element.image}`)) {
+          artWork = `
+          <a><img
+            src="${path}${element.image}"
+            alt=""
+          /></a>
+        `;
+        }
+      }
+
+      div.innerHTML = `
+      ${artWork}
+      <div class="photographer__artworks__info">
+        <p class="photographer__artworks__title">${element.title}</p>
+        <div class="likes">${element.likes} <i class="fas fa-heart"></i></div>
+      </div>
+    `;
+
+      photographerMedias.appendChild(div);
+    }
   });
 };
