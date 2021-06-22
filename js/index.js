@@ -12,3 +12,13 @@ if (home_page) {
 if (photographer_page) {
   initPhotographer();
 }
+
+(function () {
+  document.querySelector(".toggle__button").addEventListener(
+    "click",
+    function () {
+      this.parentNode.parentNode.classList.toggle("closed");
+    },
+    false
+  );
+})();

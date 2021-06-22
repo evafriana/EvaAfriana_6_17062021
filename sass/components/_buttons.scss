@@ -9,30 +9,61 @@
 
 .btn {
   border-radius: $border-radius;
-  background-color: $color-primary;
   color: #fff;
   z-index: 5;
   width: 200px;
   font-size: 20px;
-
-  @media screen and (min-width: map-get($breakpoints, large-tablet)) {
-    width: 180px;
-    height: 60px;
-  }
-
-  &__primary {
-    padding: 1rem;
-  }
+  background-color: $color-primary;
 
   &__profil {
     @media screen and (min-width: map-get($breakpoints, tablet)) {
+      width: 180px;
+      height: 60px;
       margin-left: -5vw;
       margin-top: 0.5rem;
     }
 
     @media screen and (min-width: map-get($breakpoints, desktop)) {
-      margin-left: -20rem;
+      margin-left: -15rem;
       margin-top: 0.5rem;
     }
+  }
+
+  &__mobile {
+    padding: 0.5rem;
+  }
+}
+
+.toggle {
+  &__dropdown {
+    padding: 0 1rem;
+    position: absolute;
+    overflow: hidden;
+    margin: 0 auto;
+    text-align: center;
+    -webkit-transition: height 0.3s ease;
+    transition: height 0.3s ease;
+
+    &.closed {
+      height: 60px;
+    }
+
+    li {
+      a {
+        display: block;
+        padding: 1.1rem;
+        text-align: left;
+
+        i {
+          float: right;
+          padding-top: 0.3rem;
+        }
+      }
+    }
+  }
+
+  &__border {
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
   }
 }

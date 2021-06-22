@@ -1,4 +1,4 @@
-import { getParam, dbData, tags } from "./utils.js";
+import { getParam, dbData, tags, checkFileExist } from "./utils.js";
 
 export const initPhotographer = () => {
   dbData()
@@ -35,7 +35,7 @@ const appendProfil = (photographers) => {
         <p>${photographer.tagline}</p>
       </span>
     </div>
-    <button class="btn btn__primary btn__profil desktop">
+    <button class="btn btn__profil desktop">
       <span class="contact">Contactez-moi</span>
     </button>
     <img
@@ -50,18 +50,6 @@ const appendProfil = (photographers) => {
   });
 };
 
-const checkFileExist = (urlToFile) => {
-  const xhr = new XMLHttpRequest();
-  xhr.open("HEAD", urlToFile, false);
-  xhr.send();
-
-  if (xhr.status == "404") {
-    return false;
-  } else {
-    return true;
-  }
-};
-
 const appendMedia = (media) => {
   const photographerId = parseInt(getParam("id"));
 
@@ -74,7 +62,7 @@ const appendMedia = (media) => {
       let artWork = `
         <a>
           <img
-            src="${path}not_found.png"
+            src="${path}not_found.jpeg"
             alt=""
           />
         </a>
