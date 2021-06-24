@@ -10,9 +10,9 @@ export const initPhotographer = () => {
     });
 };
 
+// call profil of photographer
 const appendData = (response) => {
   appendProfil(response.photographers);
-
   appendMedia(response.media);
 };
 
@@ -50,6 +50,46 @@ const appendProfil = (photographers) => {
   });
 };
 
+// sort artworks's photographer by popularity, date and title
+const dropdownArray = ["Popularité", "Date", "Titre"];
+const toggleButton = document.querySelector(".toggle__button");
+const toggleList = document.querySelector(".toggle__list");
+
+if (toggleButton) {
+  toggleButton.addEventListener("click", () => {
+    toggleList.classList.toggle("open");
+    toggleButton.classList.toggle("arrow-down");
+    toggleButton.classList.toggle("arrow-up");
+    appendLi();
+  });
+
+  const appendLi = () => {
+    // remove li
+    toggleList.innerText = "";
+
+    // add a ghost li
+    const li = document.createElement("li");
+    li.appendChild(document.createTextNode("_"));
+    toggleList.appendChild(li);
+
+    // add li
+    dropdownArray.forEach((item) => {
+      if (item !== toggleButton.textContent) {
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(item));
+        li.classList.add("toggle__border");
+        toggleList.appendChild(li);
+
+        li.addEventListener("click", (event) => {
+          toggleButton.textContent = item;
+          toggleList.classList.remove("open");
+        });
+      }
+    });
+  };
+}
+
+// call photographer's artworks
 const appendMedia = (media) => {
   const photographerId = parseInt(getParam("id"));
 

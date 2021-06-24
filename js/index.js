@@ -1,4 +1,3 @@
-import { getParam, dbData } from "./utils.js";
 import { initHome } from "./home_page.js";
 import { initPhotographer } from "./photographer_page.js";
 
@@ -12,13 +11,3 @@ if (home_page) {
 if (photographer_page) {
   initPhotographer();
 }
-
-(function () {
-  document.querySelector(".toggle__button").addEventListener(
-    "click",
-    function () {
-      this.parentNode.parentNode.classList.toggle("closed");
-    },
-    false
-  );
-})();

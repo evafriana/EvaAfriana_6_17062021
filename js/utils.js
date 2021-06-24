@@ -15,7 +15,7 @@ export const getParam = (param) => {
 
 export const tags = (tags) => {
   const labels = tags.map(
-    (tag) => `<a><span class="tags" aria-label="Tag">#${tag}</span></a>`
+    (tag) => `<span class="tags" aria-label="Tag">#${tag}</span>`
   );
   return `${labels.join("")}`;
 };

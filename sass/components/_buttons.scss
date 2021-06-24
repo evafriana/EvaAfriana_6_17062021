@@ -8,12 +8,8 @@
 }
 
 .btn {
-  border-radius: $border-radius;
-  color: #fff;
   z-index: 5;
-  width: 200px;
-  font-size: 20px;
-  background-color: $color-primary;
+  @include btn-primary;
 
   &__profil {
     @media screen and (min-width: map-get($breakpoints, tablet)) {
@@ -34,36 +30,72 @@
   }
 }
 
-.toggle {
-  &__dropdown {
-    padding: 0 1rem;
+.trier {
+  span {
+    display: flex;
+    position: relative;
+    width: 18rem;
+  }
+
+  a,
+  ul {
+    color: #fff;
+  }
+
+  .arrow-up::after {
+    content: "▲";
+    right: 20px;
     position: absolute;
+    top: 12px;
+  }
+
+  .arrow-down::after {
+    content: "▼";
+    right: 20px;
+    position: absolute;
+  }
+}
+
+.toggle {
+  &__button {
+    z-index: 6;
+    padding: 1rem;
+    @include btn-primary;
+  }
+
+  &__button,
+  &__list {
+    position: absolute;
+  }
+
+  &__list {
+    list-style: none;
+    box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    margin: 0 auto;
-    text-align: center;
-    -webkit-transition: height 0.3s ease;
-    transition: height 0.3s ease;
+    max-height: 0;
+    z-index: 5;
+    border-radius: 10px;
 
-    &.closed {
-      height: 60px;
+    > li {
+      position: relative;
+      background-color: $color-primary;
+      width: 200px;
+      font-size: 20px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      opacity: 1;
     }
+  }
 
-    li {
-      a {
-        display: block;
-        padding: 1.1rem;
-        text-align: left;
-
-        i {
-          float: right;
-          padding-top: 0.3rem;
-        }
-      }
-    }
+  &__list.open {
+    max-height: 320px;
+    overflow: auto;
   }
 
   &__border {
     border-top: 1px solid #fff;
-    border-bottom: 1px solid #fff;
+    padding: 0 10px;
   }
 }
