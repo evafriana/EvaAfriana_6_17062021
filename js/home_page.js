@@ -1,6 +1,7 @@
-import { dbData, tags } from "./utils.js";
+import { dbData, tags, getParam } from "./utils.js";
 
 export const initHome = () => {
+  console.log(getParam("tag"));
   dbData()
     .then((response) => {
       appendData(response);
@@ -33,3 +34,27 @@ const appendData = (response) => {
     mainGallery.appendChild(div);
   });
 };
+
+const tagsArray = [
+  "Portrait",
+  "Art",
+  "Fashion",
+  "Architecture",
+  "Travel",
+  "Sport",
+  "Animals",
+  "Events",
+];
+
+const headerNavList = document.querySelector(".header__nav__list");
+
+if (headerNavList) {
+  tagsArray.forEach((item) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+    <a tabindex="0" href="index.html?tag=${item}">#${item}</a>`;
+    li.classList.add("header__nav__item");
+    li.classList.add("tags");
+    headerNavList.appendChild(li);
+  });
+}
