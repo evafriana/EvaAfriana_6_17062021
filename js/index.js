@@ -1,4 +1,3 @@
-import { getParam, dbData } from "./utils.js";
 import { initHome } from "./home_page.js";
 import { initPhotographer } from "./photographer_page.js";
 

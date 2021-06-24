@@ -1,4 +1,4 @@
-import { getParam, dbData, tags } from "./utils.js";
+import { getParam, dbData, tags, checkFileExist } from "./utils.js";
 
 export const initPhotographer = () => {
   dbData()
@@ -10,9 +10,9 @@ export const initPhotographer = () => {
     });
 };
 
+// call profil of photographer
 const appendData = (response) => {
   appendProfil(response.photographers);
-
   appendMedia(response.media);
 };
 
@@ -35,7 +35,7 @@ const appendProfil = (photographers) => {
         <p>${photographer.tagline}</p>
       </span>
     </div>
-    <button class="btn btn__primary btn__profil desktop">
+    <button class="btn btn__profil desktop">
       <span class="contact">Contactez-moi</span>
     </button>
     <img
@@ -50,18 +50,46 @@ const appendProfil = (photographers) => {
   });
 };
 
-const checkFileExist = (urlToFile) => {
-  const xhr = new XMLHttpRequest();
-  xhr.open("HEAD", urlToFile, false);
-  xhr.send();
+// sort artworks's photographer by popularity, date and title
+const dropdownArray = ["Popularité", "Date", "Titre"];
+const toggleButton = document.querySelector(".toggle__button");
+const toggleList = document.querySelector(".toggle__list");
 
-  if (xhr.status == "404") {
-    return false;
-  } else {
-    return true;
-  }
-};
+if (toggleButton) {
+  toggleButton.addEventListener("click", () => {
+    toggleList.classList.toggle("open");
+    toggleButton.classList.toggle("arrow-down");
+    toggleButton.classList.toggle("arrow-up");
+    appendLi();
+  });
 
+  const appendLi = () => {
+    // remove li
+    toggleList.innerText = "";
+
+    // add a ghost li
+    const li = document.createElement("li");
+    li.appendChild(document.createTextNode("_"));
+    toggleList.appendChild(li);
+
+    // add li
+    dropdownArray.forEach((item) => {
+      if (item !== toggleButton.textContent) {
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(item));
+        li.classList.add("toggle__border");
+        toggleList.appendChild(li);
+
+        li.addEventListener("click", (event) => {
+          toggleButton.textContent = item;
+          toggleList.classList.remove("open");
+        });
+      }
+    });
+  };
+}
+
+// call photographer's artworks
 const appendMedia = (media) => {
   const photographerId = parseInt(getParam("id"));
 
@@ -74,7 +102,7 @@ const appendMedia = (media) => {
       let artWork = `
         <a>
           <img
-            src="${path}not_found.png"
+            src="${path}not_found.jpeg"
             alt=""
           />
         </a>
