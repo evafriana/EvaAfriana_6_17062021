@@ -24,5 +24,10 @@
       justify-content: center;
       margin: 2rem 0;
     }
+
+    &__item.active {
+      background-color: $color-primary;
+      color: white;
+    }
   }
 }
