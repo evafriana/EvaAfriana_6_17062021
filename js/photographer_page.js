@@ -83,6 +83,7 @@ if (toggleButton) {
         li.addEventListener("click", (event) => {
           toggleButton.textContent = item;
           toggleList.classList.remove("open");
+          document.querySelector(".photographer__artworks").innerText = "";
         });
       }
     });
@@ -90,12 +91,12 @@ if (toggleButton) {
 }
 
 // call photographer's artworks
-const appendMedia = (media) => {
+const appendMedia = (medias) => {
   const photographerId = parseInt(getParam("id"));
 
   const photographerMedias = document.querySelector(".photographer__artworks");
 
-  media.forEach((element) => {
+  medias.forEach((element) => {
     if (element.photographerId === photographerId) {
       const div = document.createElement("div");
       const path = "assets/images/medias/";
