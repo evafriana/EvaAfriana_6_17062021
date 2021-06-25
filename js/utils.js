@@ -13,10 +13,12 @@ export const getParam = (param) => {
   return params.get(param);
 };
 
+const tag = (item) => {
+  return `<span class="tags" aria-label="Tag">#${item}</span>`;
+};
+
 export const tags = (tags) => {
-  const labels = tags.map(
-    (tag) => `<span class="tags" aria-label="Tag">#${tag}</span>`
-  );
+  const labels = tags.map((item) => tag(item));
   return `${labels.join("")}`;
 };
 
