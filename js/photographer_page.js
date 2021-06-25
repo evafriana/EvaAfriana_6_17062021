@@ -51,7 +51,12 @@ const appendProfil = (photographers) => {
 };
 
 // sort artworks's photographer by popularity, date and title
-const dropdownArray = ["Popularité", "Date", "Titre"];
+const dropdownOptions = [
+  { key: "likes", value: "Popularité" },
+  { key: "date", value: "Date" },
+  { key: "title", value: "Titre" },
+  ,
+];
 const toggleButton = document.querySelector(".toggle__button");
 const toggleList = document.querySelector(".toggle__list");
 
@@ -73,30 +78,56 @@ if (toggleButton) {
     toggleList.appendChild(li);
 
     // add li
-    dropdownArray.forEach((item) => {
-      if (item !== toggleButton.textContent) {
+    dropdownOptions.forEach(({ key, value }) => {
+      if (value !== toggleButton.textContent) {
         const li = document.createElement("li");
-        li.appendChild(document.createTextNode(item));
+        li.appendChild(document.createTextNode(value));
         li.classList.add("toggle__border");
         toggleList.appendChild(li);
 
         li.addEventListener("click", (event) => {
-          toggleButton.textContent = item;
+          toggleButton.textContent = value;
           toggleList.classList.remove("open");
           document.querySelector(".photographer__artworks").innerText = "";
+          resetMedia(key.toLowerCase());
         });
       }
     });
   };
 }
 
-// call photographer's artworks
-const appendMedia = (medias) => {
-  const photographerId = parseInt(getParam("id"));
+const resetMedia = (key) => {
+  dbData()
+    .then((response) => {
+      appendMedia(response.media, key);
+    })
+    .catch((err) => {
+      console.log("error: " + err);
+    });
+};
 
+// call photographer's artworks
+const appendMedia = (medias, key = "likes") => {
+  const photographerId = parseInt(getParam("id"));
   const photographerMedias = document.querySelector(".photographer__artworks");
 
-  medias.forEach((element) => {
+  let res = medias;
+
+  if (key === "title") {
+    res = medias.sort((a, b) => {
+      if (a[key] < b[key]) return -1;
+      if (a[key] > b[key]) return 1;
+      return 0;
+    });
+  } else {
+    res = medias.sort((a, b) => {
+      if (a[key] > b[key]) return -1;
+      if (a[key] < b[key]) return 1;
+      return 0;
+    });
+  }
+
+  res.forEach((element) => {
     if (element.photographerId === photographerId) {
       const div = document.createElement("div");
       const path = "assets/images/medias/";
