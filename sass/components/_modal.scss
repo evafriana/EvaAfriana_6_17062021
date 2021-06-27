@@ -2,7 +2,7 @@
   display: none;
   align-items: center;
   position: fixed;
-  z-index: 1;
+  z-index: 7;
   left: 0;
   top: 0;
   width: 100%;
@@ -20,7 +20,7 @@
     padding: 25px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
-    div {
+    &__info {
       display: flex;
       justify-content: space-between;
       margin-bottom: 1rem;

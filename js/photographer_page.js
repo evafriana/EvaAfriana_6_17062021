@@ -40,20 +40,42 @@ const appendProfil = (photographers) => {
     document.querySelector(".photographer__tag").innerHTML = `
       ${tags(photographer.tags)}
     `;
+
+    document.querySelector(".modal__content__title").innerHTML = `
+    <h2>Contactez-moi</h2>
+    <h2>${photographer.name}</h2>
+  `;
   });
 };
 
 // contact button Modal
-// Get the modal
+// DOM Elements
 const modal = document.getElementById("modal");
-
-// Get the button that opens the modal
-const modalBtn = document.getElementById("modalBtn");
+const modalBtn = document.querySelectorAll("#modalBtn");
+const modalClose = document.querySelectorAll(".close");
 
 // launch modal form
-modalBtn?.addEventListener("click", () => {
+const launchModal = () => {
   modal.style.display = "flex";
-});
+};
+
+// launch modal event
+modalBtn?.forEach((btn) => btn.addEventListener("click", launchModal));
+
+// close modal form
+const closeModal = () => {
+  modal.style.display = "none";
+};
+
+// close modal event
+modalClose.forEach((btn) => btn.addEventListener("click", closeModal));
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = (event) => {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
 
 // sort artworks's photographer by popularity, date and title
 const dropdownOptions = [
