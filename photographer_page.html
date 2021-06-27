@@ -28,7 +28,17 @@
         </div>
       </header>
       <main>
-        <section class="photographer"></section>
+        <section class="photographer">
+          <div class="photographer__profil">
+            <div class="photographer__profil__info"></div>
+            <!-- Trigger/Open The Modal -->
+            <button class="btn btn__profil desktop" id="modalBtn">
+              <span class="contact">Contactez-moi</span>
+            </button>
+            <img alt="" class="photographer__profil__img" />
+          </div>
+          <div class="photographer__tag"></div>
+        </section>
         <section class="desktop">
           <div class="trier">
             <p>Trier par</p>
@@ -38,10 +48,61 @@
             </span>
           </div>
         </section>
+
+        <!-- The Modal -->
+        <div id="modal" class="modal">
+          <!-- Modal content -->
+          <div class="modal__content">
+            <form
+              name=""
+              action="photographer_page.html"
+              method="post"
+              onsubmit="return false"
+            >
+              <div class="modal__content__info">
+                <div class="modal__content__title"></div>
+                <span class="close"></span>
+              </div>
+              <fieldset>
+                <label for="first">Prénom</label><br />
+                <input
+                  id="first"
+                  type="text"
+                  tabindex="1"
+                  minlength="2"
+                  autofocus
+                />
+              </fieldset>
+              <fieldset>
+                <label for="last">Nom</label><br />
+                <input id="last" type="text" tabindex="2" minlength="2" />
+              </fieldset>
+              <fieldset>
+                <label for="email">E-mail</label><br />
+                <input id="email" type="email" tabindex="3" />
+              </fieldset>
+              <fieldset>
+                <label for="textarea">Votre méssage</label><br />
+                <textarea id="textarea" tabindex="4"></textarea>
+              </fieldset>
+              <fieldset>
+                <button
+                  class="btn close"
+                  name="submit"
+                  type="submit"
+                  data-submit="...Sending"
+                >
+                  Envoyer
+                </button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
         <section class="photographer__artworks"></section>
       </main>
       <footer class="footer">
-        <button class="btn btn__mobile mobile">
+        <button id="modalBtn" class="btn btn__mobile mobile">
           <span class="contact">Contactez-moi</span>
         </button>
         <div class="desktop">

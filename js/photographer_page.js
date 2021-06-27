@@ -24,30 +24,57 @@ const appendProfil = (photographers) => {
   });
 
   const photographerProfil = document.querySelectorAll(".photographer");
-  photographerProfil.forEach((element) => {
-    const div = document.createElement("div");
-    div.innerHTML = `
-    <div class="photographer__profil">
-    <div class="photographer__profil__info">
-      <h2>${photographer.name}</h2>
-      <span>
-        <h4>${photographer.city}, ${photographer.country}</h4>
-        <p>${photographer.tagline}</p>
-      </span>
-    </div>
-    <button class="btn btn__profil desktop">
-      <span class="contact">Contactez-moi</span>
-    </button>
-    <img
-      src="./assets/images/photographers/${photographer.portrait}"
-      alt=""
-      class="photographer__profil__img"
-    />
-    </div>
-    ${tags(photographer.tags)}
-      `;
-    element.appendChild(div);
+
+  photographerProfil.forEach(() => {
+    document.querySelector(".photographer__profil__info").innerHTML = `
+    <h2>${photographer.name}</h2>
+    <span>
+      <h4>${photographer.city}, ${photographer.country}</h4>
+      <p>${photographer.tagline}</p> 
+    </span>`;
+
+    document.querySelector(
+      ".photographer__profil__img"
+    ).src = `./assets/images/photographers/${photographer.portrait}`;
+
+    document.querySelector(".photographer__tag").innerHTML = `
+      ${tags(photographer.tags)}
+    `;
+
+    document.querySelector(".modal__content__title").innerHTML = `
+    <h2>Contactez-moi</h2>
+    <h2>${photographer.name}</h2>
+  `;
   });
+};
+
+// contact button Modal
+// DOM Elements
+const modal = document.getElementById("modal");
+const modalBtn = document.querySelectorAll("#modalBtn");
+const modalClose = document.querySelectorAll(".close");
+
+// launch modal form
+const launchModal = () => {
+  modal.style.display = "flex";
+};
+
+// launch modal event
+modalBtn?.forEach((btn) => btn.addEventListener("click", launchModal));
+
+// close modal form
+const closeModal = () => {
+  modal.style.display = "none";
+};
+
+// close modal event
+modalClose.forEach((btn) => btn.addEventListener("click", closeModal));
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = (event) => {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 };
 
 // sort artworks's photographer by popularity, date and title
