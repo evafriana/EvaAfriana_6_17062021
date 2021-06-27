@@ -24,31 +24,36 @@ const appendProfil = (photographers) => {
   });
 
   const photographerProfil = document.querySelectorAll(".photographer");
-  photographerProfil.forEach((element) => {
-    const div = document.createElement("div");
-    div.innerHTML = `
-    <div class="photographer__profil">
-    <div class="photographer__profil__info">
-      <h2>${photographer.name}</h2>
-      <span>
-        <h4>${photographer.city}, ${photographer.country}</h4>
-        <p>${photographer.tagline}</p>
-      </span>
-    </div>
-    <button class="btn btn__profil desktop">
-      <span class="contact">Contactez-moi</span>
-    </button>
-    <img
-      src="./assets/images/photographers/${photographer.portrait}"
-      alt=""
-      class="photographer__profil__img"
-    />
-    </div>
-    ${tags(photographer.tags)}
-      `;
-    element.appendChild(div);
+
+  photographerProfil.forEach(() => {
+    document.querySelector(".photographer__profil__info").innerHTML = `
+    <h2>${photographer.name}</h2>
+    <span>
+      <h4>${photographer.city}, ${photographer.country}</h4>
+      <p>${photographer.tagline}</p> 
+    </span>`;
+
+    document.querySelector(
+      ".photographer__profil__img"
+    ).src = `./assets/images/photographers/${photographer.portrait}`;
+
+    document.querySelector(".photographer__tag").innerHTML = `
+      ${tags(photographer.tags)}
+    `;
   });
 };
+
+// contact button Modal
+// Get the modal
+const modal = document.getElementById("modal");
+
+// Get the button that opens the modal
+const modalBtn = document.getElementById("modalBtn");
+
+// launch modal form
+modalBtn?.addEventListener("click", () => {
+  modal.style.display = "flex";
+});
 
 // sort artworks's photographer by popularity, date and title
 const dropdownOptions = [

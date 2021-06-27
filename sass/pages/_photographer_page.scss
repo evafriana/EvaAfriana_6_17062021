@@ -34,11 +34,17 @@
     flex-direction: row;
     justify-content: space-between;
     line-height: 1.4;
+    padding-bottom: 1rem;
+
+    @media screen and (min-width: map-get($breakpoints, tablet)) {
+      padding-bottom: 0;
+    }
 
     &__img {
       @include img-profil;
       width: 120px;
       height: 120px;
+
       @media screen and (min-width: map-get($breakpoints, tablet)) {
         width: 200px;
         height: 200px;
@@ -47,7 +53,11 @@
 
     &__info {
       span {
-        line-height: 2.5;
+        line-height: 1.7;
+
+        @media screen and (min-width: map-get($breakpoints, tablet)) {
+          line-height: 2.5;
+        }
       }
     }
   }

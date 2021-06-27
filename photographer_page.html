@@ -28,7 +28,17 @@
         </div>
       </header>
       <main>
-        <section class="photographer"></section>
+        <section class="photographer">
+          <div class="photographer__profil">
+            <div class="photographer__profil__info"></div>
+            <!-- Trigger/Open The Modal -->
+            <button class="btn btn__profil desktop" id="modalBtn">
+              <span class="contact">Contactez-moi</span>
+            </button>
+            <img alt="" class="photographer__profil__img" />
+          </div>
+          <div class="photographer__tag"></div>
+        </section>
         <section class="desktop">
           <div class="trier">
             <p>Trier par</p>
@@ -38,6 +48,50 @@
             </span>
           </div>
         </section>
+
+        <!-- The Modal -->
+        <div id="modal" class="modal">
+          <!-- Modal content -->
+          <div class="modal__content">
+            <form action="" method="post">
+              <div>
+                <div class="modal__content__title">
+                  <h2>Contactez-moi</h2>
+                  <h2>Mimi kiel</h2>
+                </div>
+                <span class="close"></span>
+              </div>
+              <fieldset>
+                <label for="first">Prénom</label><br />
+                <input type="text" tabindex="1" required autofocus />
+              </fieldset>
+              <fieldset>
+                <label for="last">Nom</label><br />
+                <input type="email" tabindex="2" required />
+              </fieldset>
+              <fieldset>
+                <label for="email">E-mail</label><br />
+                <input type="tel" tabindex="3" required />
+              </fieldset>
+              <fieldset>
+                <label for="textarea">Votre méssage</label><br />
+                <textarea tabindex="5" required></textarea>
+              </fieldset>
+              <fieldset>
+                <button
+                  class="btn"
+                  name="submit"
+                  type="submit"
+                  id="contact-submit"
+                  data-submit="...Sending"
+                >
+                  Envoyer
+                </button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
         <section class="photographer__artworks"></section>
       </main>
       <footer class="footer">

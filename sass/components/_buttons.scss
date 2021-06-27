@@ -8,7 +8,8 @@
 }
 
 .btn {
-  z-index: 5;
+  z-index: 1;
+  cursor: pointer;
   @include btn-primary;
 
   &__profil {
@@ -26,7 +27,7 @@
   }
 
   &__mobile {
-    padding: 0.5rem;
+    padding: 1rem;
   }
 }
 
@@ -58,7 +59,8 @@
 
 .toggle {
   &__button {
-    z-index: 6;
+    width: 200px;
+    z-index: 1;
     padding: 1rem;
     @include btn-primary;
   }
