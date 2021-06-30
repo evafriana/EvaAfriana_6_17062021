@@ -157,12 +157,14 @@ const appendMedia = (medias, key = "likes") => {
   res.forEach((element) => {
     if (element.photographerId === photographerId) {
       const div = document.createElement("div");
+      div.classList.add("artwork__modal");
       const path = "assets/images/medias/";
       let artWork = `
         <a>
           <img
+            class="artwork__img"
             src="${path}not_found.jpeg"
-            alt=""
+            alt="${element.title}"
           />
         </a>
       `;
@@ -181,8 +183,9 @@ const appendMedia = (medias, key = "likes") => {
         if (checkFileExist(`${path}${element.image}`)) {
           artWork = `
           <a><img
+            class="artwork__img"
             src="${path}${element.image}"
-            alt=""
+            alt="${element.title}"
           /></a>
         `;
         }
@@ -199,4 +202,89 @@ const appendMedia = (medias, key = "likes") => {
       photographerMedias.appendChild(div);
     }
   });
+
+  Lightbox.init();
 };
+
+// lightbox modal carousel
+class Lightbox {
+  static init() {
+    console.log("ok");
+    const links = document.querySelectorAll(".artwork__img").forEach((link) => {
+      console.log(link);
+
+      return link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        new Lightbox({
+          url: link.getAttribute("src"),
+          title: link.getAttribute("alt"),
+        });
+      });
+    });
+  }
+
+  /**
+   * @param {string} url Url de l'image
+   */
+  constructor({ url, title }) {
+    const element = this.buildDOM({ url, title });
+    document.body.appendChild(element);
+  }
+
+  /**
+   * close lightbox
+   * @param {HTMLElement} element
+   */
+  close(element) {
+    element.classList.add("fadeOut");
+    window.setTimeout(() => {
+      element.parentElement.removeChild(element);
+    }, 500);
+  }
+
+  /**
+   * @param {object} url & title de l'image
+   * @return {HTMLElement}
+   */
+  buildDOM({ url, title }) {
+    const dom = document.createElement("div");
+    dom.classList.add("lightbox");
+    dom.innerHTML = `<button class="lightbox__close"></button>
+    <button class="lightbox__next"></button>
+    <button class="lightbox__prev"></button>
+    <div class="lightbox__container">
+      <img
+        src="./${url}"
+        alt="${title}"
+      />
+      <div class="lightbox__container__info">${title}</div>
+    </div>`;
+    dom
+      .querySelector(".lightbox__close")
+      // .addEventListener("click", this.close.bind(this));
+      .addEventListener("click", () => {
+        this.close(dom);
+      });
+    return dom;
+  }
+}
+
+/**
+ * 
+  <div class="lightbox">
+    <button class="lightbox__close"></button>
+    <button class="lightbox__next"></button>
+    <button class="lightbox__prev"></button>
+    <div class="lightbox__container">
+      <img
+        src="./assets/images/medias/Animals_Majesty.jpg "
+        alt=""
+        width="500px"
+        height="auto"
+        style="object-fit: contain"
+      />
+      <div class="lightbox__container__info">Titre</div>
+    </div>
+  </div>
+ */

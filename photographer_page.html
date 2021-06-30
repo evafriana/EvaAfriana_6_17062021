@@ -27,7 +27,7 @@
           </a>
         </div>
       </header>
-      <main>
+      <main aria-hidden="false">
         <section class="photographer">
           <div class="photographer__profil">
             <div class="photographer__profil__info"></div>
@@ -50,7 +50,13 @@
         </section>
 
         <!-- The Modal -->
-        <div id="modal" class="modal">
+        <div
+          id="modal"
+          class="modal"
+          aria-hidden="true"
+          role="dialog"
+          aria-describedby="modalTitle"
+        >
           <!-- Modal content -->
           <div class="modal__content">
             <form
@@ -59,7 +65,7 @@
               method="post"
               onsubmit="return false"
             >
-              <div class="modal__content__info">
+              <div class="modal__content__info" id="modalTitle">
                 <div class="modal__content__title"></div>
                 <span class="close"></span>
               </div>
@@ -99,7 +105,12 @@
           </div>
         </div>
 
-        <section class="photographer__artworks"></section>
+        <section
+          class="photographer__artworks"
+          aria-hidden="true"
+          role="dialog"
+          aria-describedby="modalTitle"
+        ></section>
       </main>
       <footer class="footer">
         <button id="modalBtn" class="btn btn__mobile mobile">
