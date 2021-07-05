@@ -157,12 +157,12 @@ const appendMedia = (medias, key = "likes") => {
   res.forEach((element) => {
     if (element.photographerId === photographerId) {
       const div = document.createElement("div");
-      div.classList.add("artwork__modal");
+      div.classList.add("photographer__artwork");
       const path = "assets/images/medias/";
       let artWork = `
         <a>
           <img
-            class="artwork__img"
+            class="photographer__artwork__img"
             src="${path}not_found.jpeg"
             alt="${element.title}"
           />
@@ -183,7 +183,7 @@ const appendMedia = (medias, key = "likes") => {
         if (checkFileExist(`${path}${element.image}`)) {
           artWork = `
           <a><img
-            class="artwork__img"
+            class="photographer__artwork__img"
             src="${path}${element.image}"
             alt="${element.title}"
           /></a>
@@ -207,40 +207,111 @@ const appendMedia = (medias, key = "likes") => {
 };
 
 // lightbox modal carousel
+/**
+ * @property {HTMLElement} element
+ * @property {string[]} gallery lightbox image paths
+ * @property {string} url currently displayed images
+ */
 class Lightbox {
   static init() {
-    console.log("ok");
-    const links = document.querySelectorAll(".artwork__img").forEach((link) => {
-      console.log(link);
-
+    const links = Array.from(
+      document.querySelectorAll(".photographer__artwork__img")
+    );
+    const gallery = links.map((link) => link.getAttribute("src"));
+    links.forEach((link) => {
       return link.addEventListener("click", (e) => {
         e.preventDefault();
 
         new Lightbox({
           url: link.getAttribute("src"),
-          title: link.getAttribute("alt"),
+          // title: link.getAttribute("alt"),
+          gallery,
         });
       });
     });
   }
 
   /**
+   * @param {string} url Url of image
+   * @param {string[]} gallery lightbox image paths
+   */
+  constructor({ url, title, gallery }) {
+    this.element = this.buildDOM({ url, title });
+    this.images = gallery;
+    this.loadImage(url);
+    this.onKeyUp = this.onKeyUp.bind(this);
+    document.body.appendChild(this.element);
+    document.addEventListener("keyup", this.onKeyUp);
+  }
+
+  /**
    * @param {string} url Url de l'image
    */
-  constructor({ url, title }) {
-    const element = this.buildDOM({ url, title });
-    document.body.appendChild(element);
+  loadImage(url) {
+    this.url = null;
+    const image = new Image();
+    const container = this.element.querySelector(".lightbox__container");
+    container.innerHTML = "";
+    // const loader = document.createElement("div");
+    // loader.classList.add("lightbox__loader");
+    // container.appendChild(loader);
+    // console.log(loader);
+    image.onload = () => {
+      // container.removeChild(loader);
+      container.appendChild(image);
+      this.url = url;
+    };
+    image.src = url;
+  }
+
+  /**
+   * @param {KeyboardEvent} e
+   */
+
+  onKeyUp(e) {
+    if (e.key === "Escape") {
+      this.close(e);
+    } else if (e.key === "ArrowRight") {
+      this.next(e);
+    } else if (e.key === "ArrowLeft") {
+      this.prev(e);
+    }
   }
 
   /**
    * close lightbox
-   * @param {HTMLElement} element
+   * @param {MouseEvent|KeyboardEvent} element
    */
   close(element) {
     element.classList.add("fadeOut");
     window.setTimeout(() => {
       element.parentElement.removeChild(element);
     }, 500);
+    document.removeEventListener("keyup", this.onKeyUp);
+  }
+
+  /**
+   * next lightbox
+   * @param {MouseEvent|KeyboardEvent} element
+   */
+  next(element) {
+    let i = this.images.findIndex((img) => img === this.url);
+    if (i === this.images.length - 1) {
+      i = -1;
+    }
+    this.loadImage(this.images[i + 1]);
+  }
+
+  /**
+   * prev lightbox
+   * @param {MouseEvent|KeyboardEvent} element
+   */
+  prev(element) {
+    let i = this.images.findIndex((img) => img === this.url);
+    if (i === 0) {
+      i = this.images.length;
+    }
+    this.loadImage(this.images[i - 1]);
   }
 
   /**
@@ -254,18 +325,17 @@ class Lightbox {
     <button class="lightbox__next"></button>
     <button class="lightbox__prev"></button>
     <div class="lightbox__container">
-      <img
-        src="./${url}"
-        alt="${title}"
-      />
-      <div class="lightbox__container__info">${title}</div>
     </div>`;
-    dom
-      .querySelector(".lightbox__close")
-      // .addEventListener("click", this.close.bind(this));
-      .addEventListener("click", () => {
-        this.close(dom);
-      });
+    dom.querySelector(".lightbox__close").addEventListener("click", () => {
+      this.close(dom);
+    });
+    dom.querySelector(".lightbox__next").addEventListener("click", () => {
+      this.next(dom);
+    });
+    dom.querySelector(".lightbox__prev").addEventListener("click", () => {
+      this.prev(dom);
+    });
+
     return dom;
   }
 }
@@ -277,14 +347,11 @@ class Lightbox {
     <button class="lightbox__next"></button>
     <button class="lightbox__prev"></button>
     <div class="lightbox__container">
-      <img
-        src="./assets/images/medias/Animals_Majesty.jpg "
-        alt=""
-        width="500px"
-        height="auto"
-        style="object-fit: contain"
+           <img
+        src="./${url}"
+        alt="${title}"
       />
-      <div class="lightbox__container__info">Titre</div>
+      <div class="lightbox__container__info">${title}</div>
     </div>
   </div>
  */
