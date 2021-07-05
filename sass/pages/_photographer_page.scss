@@ -65,10 +65,11 @@
   &__artworks {
     margin: 3rem 0;
     color: $color-primary;
+    margin-bottom: 0.5rem;
 
-    div {
-      align-self: center;
-    }
+    // div {
+    //   align-self: center;
+    // }
 
     @media screen and (min-width: map-get($breakpoints, tablet)) {
       display: grid;
@@ -96,6 +97,7 @@
     &__info {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       flex-direction: row;
       padding: 0.7rem;
     }

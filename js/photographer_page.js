@@ -191,7 +191,11 @@ const appendMedia = (medias, key = "likes") => {
       div.innerHTML = `
       ${artWork}
       <div class="photographer__artworks__info">
-        <p class="photographer__artworks__title">${element.title}</p>
+       
+          <p class="photographer__artworks__title">${element.title}</p>
+          <p class="photographer__artworks__date">${element.date}</p>
+          <p class="photographer__artworks__price">${element.price}€</p>
+      
         <div class="likes">${element.likes} <i class="fas fa-heart"></i></div>
       </div>
     `;
