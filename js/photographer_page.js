@@ -218,6 +218,7 @@ class Lightbox {
       document.querySelectorAll(".photographer__artwork__img")
     );
     const gallery = links.map((link) => link.getAttribute("src"));
+
     links.forEach((link) => {
       return link.addEventListener("click", (e) => {
         e.preventDefault();
@@ -252,12 +253,7 @@ class Lightbox {
     const image = new Image();
     const container = this.element.querySelector(".lightbox__container");
     container.innerHTML = "";
-    // const loader = document.createElement("div");
-    // loader.classList.add("lightbox__loader");
-    // container.appendChild(loader);
-    // console.log(loader);
     image.onload = () => {
-      // container.removeChild(loader);
       container.appendChild(image);
       this.url = url;
     };
@@ -309,6 +305,7 @@ class Lightbox {
   prev(element) {
     let i = this.images.findIndex((img) => img === this.url);
     if (i === 0) {
+      console.log(this);
       i = this.images.length;
     }
     this.loadImage(this.images[i - 1]);
