@@ -154,8 +154,11 @@ const appendMedia = (medias, key = "likes") => {
     });
   }
 
+  let numberLikes = 0;
+
   res.forEach((element) => {
     if (element.photographerId === photographerId) {
+      numberLikes += element.likes;
       const div = document.createElement("div");
       const path = "assets/images/medias/";
       let artWork = `
@@ -195,7 +198,7 @@ const appendMedia = (medias, key = "likes") => {
           <p class="photographer__artworks__date">${element.date}</p>
           <p class="photographer__artworks__price">${element.price}€</p>
         <div>
-          <span id="likes">${element.likes}</span> 
+          <span id="likes" class="likes">${element.likes}</span> 
           <i class="fas fa-heart clickme"></i>
         </div>
       </div>
@@ -210,7 +213,11 @@ const appendMedia = (medias, key = "likes") => {
         // const count = parseInt(likes.innerHTML) + 1;
         const count = parseInt(element.likes) + 1;
         likes.innerHTML = count;
+        totalLikes.innerHTML = numberLikes + 1;
       });
     }
   });
+
+  const totalLikes = document.querySelector(".total__likes");
+  totalLikes.innerHTML = numberLikes;
 };
