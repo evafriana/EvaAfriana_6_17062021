@@ -213,11 +213,21 @@ const appendMedia = (medias, key = "likes") => {
         // const count = parseInt(likes.innerHTML) + 1;
         const count = parseInt(element.likes) + 1;
         likes.innerHTML = count;
-        totalLikes.innerHTML = numberLikes + 1;
+        countLikes();
       });
     }
   });
 
   const totalLikes = document.querySelector(".total__likes");
   totalLikes.innerHTML = numberLikes;
+};
+
+const countLikes = () => {
+  const totalLikes = document.querySelector(".total__likes");
+  const likesSpan = document.querySelectorAll(".likes");
+  let count = 0;
+  likesSpan.forEach((span) => {
+    count += parseInt(span.innerHTML);
+  });
+  totalLikes.innerHTML = count;
 };
