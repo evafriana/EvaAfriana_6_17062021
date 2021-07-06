@@ -191,12 +191,26 @@ const appendMedia = (medias, key = "likes") => {
       div.innerHTML = `
       ${artWork}
       <div class="photographer__artworks__info">
-        <p class="photographer__artworks__title">${element.title}</p>
-        <div class="likes">${element.likes} <i class="fas fa-heart"></i></div>
+          <p class="photographer__artworks__title">${element.title}</p>
+          <p class="photographer__artworks__date">${element.date}</p>
+          <p class="photographer__artworks__price">${element.price}€</p>
+        <div>
+          <span id="likes">${element.likes}</span> 
+          <i class="fas fa-heart clickme"></i>
+        </div>
       </div>
     `;
 
       photographerMedias.appendChild(div);
+
+      const clickme = div.querySelector(".clickme");
+      const likes = div.querySelector("#likes");
+
+      clickme.addEventListener("click", () => {
+        // const count = parseInt(likes.innerHTML) + 1;
+        const count = parseInt(element.likes) + 1;
+        likes.innerHTML = count;
+      });
     }
   });
 };
