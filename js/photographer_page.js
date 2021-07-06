@@ -225,7 +225,7 @@ class Lightbox {
 
         new Lightbox({
           url: link.getAttribute("src"),
-          // title: link.getAttribute("alt"),
+          // title: link.getAttribute("alt", `${title}`),
           gallery,
         });
       });
@@ -239,7 +239,7 @@ class Lightbox {
   constructor({ url, title, gallery }) {
     this.element = this.buildDOM({ url, title });
     this.images = gallery;
-    this.loadImage(url);
+    this.loadImage(url, title);
     this.onKeyUp = this.onKeyUp.bind(this);
     document.body.appendChild(this.element);
     document.addEventListener("keyup", this.onKeyUp);
@@ -248,16 +248,19 @@ class Lightbox {
   /**
    * @param {string} url Url de l'image
    */
-  loadImage(url) {
+  loadImage(url, title) {
     this.url = null;
     const image = new Image();
     const container = this.element.querySelector(".lightbox__container");
     container.innerHTML = "";
     image.onload = () => {
+      container.innerHTML = `
+      <span class="lightbox__container__info">${title}</span>`;
       container.appendChild(image);
       this.url = url;
     };
     image.src = url;
+    image.alt = `${title}`;
   }
 
   /**
@@ -348,7 +351,7 @@ class Lightbox {
         src="./${url}"
         alt="${title}"
       />
-      <div class="lightbox__container__info">${title}</div>
+      <span class="lightbox__container__info">${title}</span>
     </div>
   </div>
  */
