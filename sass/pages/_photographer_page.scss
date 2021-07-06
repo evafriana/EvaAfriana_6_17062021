@@ -11,16 +11,12 @@
   @media screen and (min-width: map-get($breakpoints, large-tablet)) {
     padding: 4rem 3rem;
     background-color: $color-secondary-bg;
-  }
 
-  h2 {
-    @media screen and (min-width: map-get($breakpoints, large-tablet)) {
+    h2 {
       font-size: 56px;
     }
-  }
 
-  h4 {
-    @media screen and (min-width: map-get($breakpoints, tablet)) {
+    h4 {
       font-size: 20px;
     }
   }
@@ -65,11 +61,6 @@
   &__artworks {
     margin: 3rem 0;
     color: $color-primary;
-    margin-bottom: 0.5rem;
-
-    // div {
-    //   align-self: center;
-    // }
 
     @media screen and (min-width: map-get($breakpoints, tablet)) {
       display: grid;
@@ -100,6 +91,11 @@
       align-items: center;
       flex-direction: row;
       padding: 0.7rem;
+      margin-bottom: 1rem;
+
+      .clickme {
+        cursor: pointer;
+      }
     }
 
     &__title {
