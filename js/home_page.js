@@ -1,8 +1,7 @@
 import { dbData, tags, getParam } from "./utils.js";
 
 export const initHome = () => {
-  // console.log(getParam("tag"));
-  // si il y a un tag on fait qqch sinon return à page index avec tous les photographers
+  handleGotocontent();
   dbData()
     .then((response) => {
       let res = response.photographers;
@@ -18,6 +17,17 @@ export const initHome = () => {
     .catch((err) => {
       console.log("error: " + err);
     });
+};
+
+// go to content scroll
+const handleGotocontent = () => {
+  const goToContent = document.querySelector(".gotocontent");
+  goToContent.innerHTML = "Passer au contenu";
+
+  window.addEventListener("scroll", () => {
+    document.body.dataset.scroll = window.scrollY;
+    document.body.dataset.scroll;
+  });
 };
 
 const appendData = (photographers) => {

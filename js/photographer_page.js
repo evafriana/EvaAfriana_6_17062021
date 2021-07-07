@@ -10,15 +10,6 @@ export const initPhotographer = () => {
     });
 };
 
-// go to content scroll
-const goToContent = document.querySelector(".gotocontent");
-goToContent.innerHTML = "Passer au contenu";
-
-window.addEventListener("scroll", () => {
-  document.body.dataset.scroll = window.scrollY;
-  document.body.dataset.scroll;
-});
-
 // call profil of photographer
 const appendData = (response) => {
   appendProfil(response.photographers);
