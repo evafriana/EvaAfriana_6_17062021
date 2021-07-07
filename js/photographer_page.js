@@ -46,6 +46,10 @@ const appendProfil = (photographers) => {
     <h2>${photographer.name}</h2>
   `;
   });
+
+  // the price of photographer in footer
+  const photographerPrice = document.querySelector(".photographer__price");
+  photographerPrice.innerHTML = `${photographer.price}€`;
 };
 
 // contact button Modal
@@ -222,6 +226,7 @@ const appendMedia = (medias, key = "likes") => {
   totalLikes.innerHTML = numberLikes;
 };
 
+// footer for total likes or le cliché
 const countLikes = () => {
   const totalLikes = document.querySelector(".total__likes");
   const likesSpan = document.querySelectorAll(".likes");
