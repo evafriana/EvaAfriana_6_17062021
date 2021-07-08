@@ -37,6 +37,10 @@ const appendProfil = (photographers) => {
       ".photographer__profil__img"
     ).src = `./assets/images/photographers/${photographer.portrait}`;
 
+    document
+      .querySelector(".photographer__profil__img")
+      .setAttribute("aria-label", `${photographer.name}`);
+
     document.querySelector(".photographer__tag").innerHTML = `
       ${tags(photographer.tags)}
     `;
@@ -50,6 +54,10 @@ const appendProfil = (photographers) => {
   // the price of photographer in footer
   const photographerPrice = document.querySelector(".photographer__price");
   photographerPrice.innerHTML = `${photographer.price}€`;
+
+  // contact button Modal
+  const modal = document.getElementById("modal");
+  modal.setAttribute("aria-labelledby", `Contact me ${photographer.name}`);
 };
 
 // contact button Modal
@@ -80,6 +88,17 @@ window.onclick = (event) => {
     modal.style.display = "none";
   }
 };
+
+// Close modal when escape key is pressed
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    //if esc key was not pressed in combination with ctrl or alt or shift
+    const isNotCombinedKey = !(event.ctrlKey || event.altKey || event.shiftKey);
+    if (isNotCombinedKey) {
+      closeModal();
+    }
+  }
+});
 
 // sort artworks's photographer by popularity, date and title
 const dropdownOptions = [
@@ -112,6 +131,7 @@ if (toggleButton) {
     dropdownOptions.forEach(({ key, value }) => {
       if (value !== toggleButton.textContent) {
         const li = document.createElement("li");
+        li.setAttribute("role", "option");
         li.appendChild(document.createTextNode(value));
         li.classList.add("toggle__border");
         toggleList.appendChild(li);
@@ -169,7 +189,7 @@ const appendMedia = (medias, key = "likes") => {
         <a>
           <img
             src="${path}not_found.jpeg"
-            alt=""
+            alt="${element.title}"
           />
         </a>
       `;
@@ -189,24 +209,24 @@ const appendMedia = (medias, key = "likes") => {
           artWork = `
           <a><img
             src="${path}${element.image}"
-            alt=""
+            alt="${element.title}"
           /></a>
         `;
         }
       }
 
       div.innerHTML = `
-      ${artWork}
-      <div class="photographer__artworks__info">
-          <p class="photographer__artworks__title">${element.title}</p>
-          <p class="photographer__artworks__date">${element.date}</p>
-          <p class="photographer__artworks__price">${element.price}€</p>
-        <div>
-          <span id="likes" class="likes">${element.likes}</span> 
-          <i class="fas fa-heart clickme"></i>
+        ${artWork}
+        <div class="photographer__artworks__info">
+            <p class="photographer__artworks__title">${element.title}</p>
+            <p class="photographer__artworks__date">${element.date}</p>
+            <p class="photographer__artworks__price">${element.price}€</p>
+          <div>
+            <span id="likes" class="likes">${element.likes}</span>
+            <i class="fas fa-heart clickme" aria-label="likes"></i>
+          </div>
         </div>
-      </div>
-    `;
+      `;
 
       photographerMedias.appendChild(div);
 
