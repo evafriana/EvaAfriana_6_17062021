@@ -1,8 +1,6 @@
 import { dbData, tags, getParam } from "./utils.js";
 
 export const initHome = () => {
-  // console.log(getParam("tag"));
-  // si il y a un tag on fait qqch sinon return à page index avec tous les photographers
   dbData()
     .then((response) => {
       let res = response.photographers;

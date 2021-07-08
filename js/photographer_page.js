@@ -140,12 +140,14 @@ const appendMedia = (medias, key = "likes") => {
 
   let res = medias;
 
+  // to sort the title of media from a to z
   if (key === "title") {
     res = medias.sort((a, b) => {
       if (a[key] < b[key]) return -1;
       if (a[key] > b[key]) return 1;
       return 0;
     });
+    // to sort media from smallest to largest
   } else {
     res = medias.sort((a, b) => {
       if (a[key] > b[key]) return -1;
@@ -172,7 +174,7 @@ const appendMedia = (medias, key = "likes") => {
       if (element.video) {
         if (checkFileExist(`${path}${element.video}`)) {
           artWork = `
-          <a><video controls>
+          <a><video controls class="photographer__artwork__img">
             <source src="${path}${element.video}" type="video/mp4">
             <source src="${path}${element.video}" type="video/ogg">
             Your browser does not support the video tag.
@@ -202,7 +204,6 @@ const appendMedia = (medias, key = "likes") => {
       photographerMedias.appendChild(div);
     }
   });
-
   Lightbox.init();
 };
 
@@ -214,10 +215,12 @@ const appendMedia = (medias, key = "likes") => {
  */
 class Lightbox {
   static init() {
+    const element = document.querySelector(".photographer__artwork");
     const links = Array.from(
       document.querySelectorAll(".photographer__artwork__img")
     );
     const gallery = links.map((link) => link.getAttribute("src"));
+    // const gallery = links.map((link) => link.getAttribute("data-id"));
 
     links.forEach((link) => {
       return link.addEventListener("click", (e) => {
@@ -225,6 +228,7 @@ class Lightbox {
 
         new Lightbox({
           url: link.getAttribute("src"),
+          // url: link.getAttribute("data-id"),
           // title: link.getAttribute("alt", `${title}`),
           gallery,
         });
@@ -269,7 +273,7 @@ class Lightbox {
 
   onKeyUp(e) {
     if (e.key === "Escape") {
-      this.close(e);
+      this.close();
     } else if (e.key === "ArrowRight") {
       this.next(e);
     } else if (e.key === "ArrowLeft") {
@@ -281,7 +285,8 @@ class Lightbox {
    * close lightbox
    * @param {MouseEvent|KeyboardEvent} element
    */
-  close(element) {
+  close() {
+    const element = document.querySelector(".lightbox");
     element.classList.add("fadeOut");
     window.setTimeout(() => {
       element.parentElement.removeChild(element);
@@ -308,7 +313,6 @@ class Lightbox {
   prev(element) {
     let i = this.images.findIndex((img) => img === this.url);
     if (i === 0) {
-      console.log(this);
       i = this.images.length;
     }
     this.loadImage(this.images[i - 1]);
@@ -327,7 +331,7 @@ class Lightbox {
     <div class="lightbox__container">
     </div>`;
     dom.querySelector(".lightbox__close").addEventListener("click", () => {
-      this.close(dom);
+      this.close();
     });
     dom.querySelector(".lightbox__next").addEventListener("click", () => {
       this.next(dom);
