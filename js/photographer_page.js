@@ -215,7 +215,6 @@ const appendMedia = (medias, key = "likes") => {
  */
 class Lightbox {
   static init() {
-    const element = document.querySelector(".photographer__artwork");
     const links = Array.from(
       document.querySelectorAll(".photographer__artwork__img")
     );
@@ -325,10 +324,10 @@ class Lightbox {
   buildDOM({ url, title }) {
     const dom = document.createElement("div");
     dom.classList.add("lightbox");
-    dom.innerHTML = `<button class="lightbox__close"></button>
-    <button class="lightbox__next"></button>
-    <button class="lightbox__prev"></button>
-    <div class="lightbox__container">
+    dom.innerHTML = `<button class="lightbox__close" aria-label="Close dialog"></button>
+    <button class="lightbox__next" aria-label="Next image"></button>
+    <button class="lightbox__prev" aria-label="Previous image"></button>
+    <div class="lightbox__container" aria-label="image closeup view">
     </div>`;
     dom.querySelector(".lightbox__close").addEventListener("click", () => {
       this.close();
