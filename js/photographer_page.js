@@ -37,6 +37,10 @@ const appendProfil = (photographers) => {
       ".photographer__profil__img"
     ).src = `./assets/images/photographers/${photographer.portrait}`;
 
+    document
+      .querySelector(".photographer__profil__img")
+      .setAttribute("aria-label", `${photographer.name}`);
+
     document.querySelector(".photographer__tag").innerHTML = `
       ${tags(photographer.tags)}
     `;
@@ -46,6 +50,14 @@ const appendProfil = (photographers) => {
     <h2>${photographer.name}</h2>
   `;
   });
+
+  // the price of photographer in footer
+  const photographerPrice = document.querySelector(".photographer__price");
+  photographerPrice.innerHTML = `${photographer.price}€`;
+
+  // contact button Modal
+  const modal = document.getElementById("modal");
+  modal.setAttribute("aria-labelledby", `Contact me ${photographer.name}`);
 };
 
 // contact button Modal
@@ -76,6 +88,17 @@ window.onclick = (event) => {
     modal.style.display = "none";
   }
 };
+
+// Close modal when escape key is pressed
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    //if esc key was not pressed in combination with ctrl or alt or shift
+    const isNotCombinedKey = !(event.ctrlKey || event.altKey || event.shiftKey);
+    if (isNotCombinedKey) {
+      closeModal();
+    }
+  }
+});
 
 // sort artworks's photographer by popularity, date and title
 const dropdownOptions = [
@@ -108,6 +131,7 @@ if (toggleButton) {
     dropdownOptions.forEach(({ key, value }) => {
       if (value !== toggleButton.textContent) {
         const li = document.createElement("li");
+        li.setAttribute("role", "option");
         li.appendChild(document.createTextNode(value));
         li.classList.add("toggle__border");
         toggleList.appendChild(li);
@@ -156,8 +180,11 @@ const appendMedia = (medias, key = "likes") => {
     });
   }
 
+  let numberLikes = 0;
+
   res.forEach((element) => {
     if (element.photographerId === photographerId) {
+      numberLikes += element.likes;
       const div = document.createElement("div");
       div.classList.add("photographer__artwork");
       const path = "assets/images/medias/";
@@ -194,17 +221,46 @@ const appendMedia = (medias, key = "likes") => {
       }
 
       div.innerHTML = `
-      ${artWork}
-      <div class="photographer__artworks__info">
-        <p class="photographer__artworks__title">${element.title}</p>
-        <div class="likes">${element.likes} <i class="fas fa-heart"></i></div>
-      </div>
-    `;
+        ${artWork}
+        <div class="photographer__artworks__info">
+            <p class="photographer__artworks__title">${element.title}</p>
+            <p class="photographer__artworks__date">${element.date}</p>
+            <p class="photographer__artworks__price">${element.price}€</p>
+          <div>
+            <span id="likes" class="likes">${element.likes}</span>
+            <i class="fas fa-heart clickme" aria-label="likes"></i>
+          </div>
+        </div>
+      `;
 
       photographerMedias.appendChild(div);
+
+      const clickme = div.querySelector(".clickme");
+      const likes = div.querySelector("#likes");
+
+      clickme.addEventListener("click", () => {
+        // const count = parseInt(likes.innerHTML) + 1;
+        const count = parseInt(element.likes) + 1;
+        likes.innerHTML = count;
+        countLikes();
+      });
     }
   });
   Lightbox.init();
+
+  const totalLikes = document.querySelector(".total__likes");
+  totalLikes.innerHTML = numberLikes;
+};
+
+// footer for total likes or le cliché
+const countLikes = () => {
+  const totalLikes = document.querySelector(".total__likes");
+  const likesSpan = document.querySelectorAll(".likes");
+  let count = 0;
+  likesSpan.forEach((span) => {
+    count += parseInt(span.innerHTML);
+  });
+  totalLikes.innerHTML = count;
 };
 
 // lightbox modal carousel

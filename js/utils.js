@@ -14,7 +14,7 @@ export const getParam = (param) => {
 };
 
 const tag = (item) => {
-  return `<span class="tags" aria-label="Tag">#${item}</span>`;
+  return `<a href="index.html?tag=${item.toLowerCase()}"><span class="tags" aria-label="Tag">#${item}</span></a>`;
 };
 
 export const tags = (tags) => {

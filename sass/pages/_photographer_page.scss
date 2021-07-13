@@ -11,16 +11,12 @@
   @media screen and (min-width: map-get($breakpoints, large-tablet)) {
     padding: 4rem 3rem;
     background-color: $color-secondary-bg;
-  }
 
-  h2 {
-    @media screen and (min-width: map-get($breakpoints, large-tablet)) {
+    h2 {
       font-size: 56px;
     }
-  }
 
-  h4 {
-    @media screen and (min-width: map-get($breakpoints, tablet)) {
+    h4 {
       font-size: 20px;
     }
   }
@@ -66,15 +62,15 @@
     margin: 3rem 0;
     color: $color-primary;
 
-    div {
-      align-self: center;
-    }
-
     @media screen and (min-width: map-get($breakpoints, tablet)) {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 1rem 5rem;
       height: 335px;
+    }
+
+    div {
+      align-self: center;
     }
 
     img {
@@ -96,8 +92,14 @@
     &__info {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       flex-direction: row;
       padding: 0.7rem;
+      margin-bottom: 1rem;
+
+      .clickme {
+        cursor: pointer;
+      }
     }
 
     &__title {
