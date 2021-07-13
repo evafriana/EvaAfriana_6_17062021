@@ -164,12 +164,14 @@ const appendMedia = (medias, key = "likes") => {
 
   let res = medias;
 
+  // to sort the title of media from a to z
   if (key === "title") {
     res = medias.sort((a, b) => {
       if (a[key] < b[key]) return -1;
       if (a[key] > b[key]) return 1;
       return 0;
     });
+    // to sort media from smallest to largest
   } else {
     res = medias.sort((a, b) => {
       if (a[key] > b[key]) return -1;
@@ -184,10 +186,12 @@ const appendMedia = (medias, key = "likes") => {
     if (element.photographerId === photographerId) {
       numberLikes += element.likes;
       const div = document.createElement("div");
+      div.classList.add("photographer__artwork");
       const path = "assets/images/medias/";
       let artWork = `
         <a>
           <img
+            class="photographer__artwork__img"
             src="${path}not_found.jpeg"
             alt="${element.title}"
           />
@@ -197,7 +201,7 @@ const appendMedia = (medias, key = "likes") => {
       if (element.video) {
         if (checkFileExist(`${path}${element.video}`)) {
           artWork = `
-          <a><video controls>
+          <a><video controls class="photographer__artwork__img">
             <source src="${path}${element.video}" type="video/mp4">
             <source src="${path}${element.video}" type="video/ogg">
             Your browser does not support the video tag.
@@ -208,6 +212,7 @@ const appendMedia = (medias, key = "likes") => {
         if (checkFileExist(`${path}${element.image}`)) {
           artWork = `
           <a><img
+            class="photographer__artwork__img"
             src="${path}${element.image}"
             alt="${element.title}"
           /></a>
@@ -241,6 +246,7 @@ const appendMedia = (medias, key = "likes") => {
       });
     }
   });
+  Lightbox.init();
 
   const totalLikes = document.querySelector(".total__likes");
   totalLikes.innerHTML = numberLikes;
@@ -256,3 +262,155 @@ const countLikes = () => {
   });
   totalLikes.innerHTML = count;
 };
+
+// lightbox modal carousel
+/**
+ * @property {HTMLElement} element
+ * @property {string[]} gallery lightbox image paths
+ * @property {string} url currently displayed images
+ */
+class Lightbox {
+  static init() {
+    const links = Array.from(
+      document.querySelectorAll(".photographer__artwork__img")
+    );
+    const gallery = links.map((link) => link.getAttribute("src"));
+    // const gallery = links.map((link) => link.getAttribute("data-id"));
+
+    links.forEach((link) => {
+      return link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        new Lightbox({
+          url: link.getAttribute("src"),
+          // url: link.getAttribute("data-id"),
+          // title: link.getAttribute("alt", `${title}`),
+          gallery,
+        });
+      });
+    });
+  }
+
+  /**
+   * @param {string} url Url of image
+   * @param {string[]} gallery lightbox image paths
+   */
+  constructor({ url, title, gallery }) {
+    this.element = this.buildDOM({ url, title });
+    this.images = gallery;
+    this.loadImage(url, title);
+    this.onKeyUp = this.onKeyUp.bind(this);
+    document.body.appendChild(this.element);
+    document.addEventListener("keyup", this.onKeyUp);
+  }
+
+  /**
+   * @param {string} url Url de l'image
+   */
+  loadImage(url, title) {
+    this.url = null;
+    const image = new Image();
+    const container = this.element.querySelector(".lightbox__container");
+    container.innerHTML = "";
+    image.onload = () => {
+      container.innerHTML = `
+      <span class="lightbox__container__info">${title}</span>`;
+      container.appendChild(image);
+      this.url = url;
+    };
+    image.src = url;
+    image.alt = `${title}`;
+  }
+
+  /**
+   * @param {KeyboardEvent} e
+   */
+
+  onKeyUp(e) {
+    if (e.key === "Escape") {
+      this.close();
+    } else if (e.key === "ArrowRight") {
+      this.next(e);
+    } else if (e.key === "ArrowLeft") {
+      this.prev(e);
+    }
+  }
+
+  /**
+   * close lightbox
+   * @param {MouseEvent|KeyboardEvent} element
+   */
+  close() {
+    const element = document.querySelector(".lightbox");
+    element.classList.add("fadeOut");
+    window.setTimeout(() => {
+      element.parentElement.removeChild(element);
+    }, 500);
+    document.removeEventListener("keyup", this.onKeyUp);
+  }
+
+  /**
+   * next lightbox
+   * @param {MouseEvent|KeyboardEvent} element
+   */
+  next(element) {
+    let i = this.images.findIndex((img) => img === this.url);
+    if (i === this.images.length - 1) {
+      i = -1;
+    }
+    this.loadImage(this.images[i + 1]);
+  }
+
+  /**
+   * prev lightbox
+   * @param {MouseEvent|KeyboardEvent} element
+   */
+  prev(element) {
+    let i = this.images.findIndex((img) => img === this.url);
+    if (i === 0) {
+      i = this.images.length;
+    }
+    this.loadImage(this.images[i - 1]);
+  }
+
+  /**
+   * @param {object} url & title de l'image
+   * @return {HTMLElement}
+   */
+  buildDOM({ url, title }) {
+    const dom = document.createElement("div");
+    dom.classList.add("lightbox");
+    dom.innerHTML = `<button class="lightbox__close" aria-label="Close dialog"></button>
+    <button class="lightbox__next" aria-label="Next image"></button>
+    <button class="lightbox__prev" aria-label="Previous image"></button>
+    <div class="lightbox__container" aria-label="image closeup view">
+    </div>`;
+    dom.querySelector(".lightbox__close").addEventListener("click", () => {
+      this.close();
+    });
+    dom.querySelector(".lightbox__next").addEventListener("click", () => {
+      this.next(dom);
+    });
+    dom.querySelector(".lightbox__prev").addEventListener("click", () => {
+      this.prev(dom);
+    });
+
+    return dom;
+  }
+}
+
+/**
+ * 
+  <div class="lightbox">
+    <button class="lightbox__close"></button>
+    <button class="lightbox__next"></button>
+    <button class="lightbox__prev"></button>
+    <div class="lightbox__container">
+           <img
+        src="./${url}"
+        alt="${title}"
+      />
+      <span class="lightbox__container__info">${title}</span>
+    </div>
+  </div>
+ */

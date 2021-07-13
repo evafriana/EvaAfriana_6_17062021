@@ -62,7 +62,13 @@
         </section>
 
         <!-- The Modal -->
-        <div id="modal" class="modal" aria-hidden="true" role="dialog">
+        <div
+          id="modal"
+          class="modal"
+          aria-hidden="true"
+          role="dialog"
+          aria-describedby="modalTitle"
+        >
           <!-- Modal content -->
           <div class="modal__content">
             <form
@@ -71,7 +77,7 @@
               method="post"
               onsubmit="return false"
             >
-              <div class="modal__content__info">
+              <div class="modal__content__info" id="modalTitle">
                 <div class="modal__content__title"></div>
                 <span class="close" aria-label="Close Contact Form"></span>
               </div>
@@ -128,7 +134,10 @@
           </div>
         </div>
 
-        <section class="photographer__artworks"></section>
+        <section
+          class="photographer__artworks"
+          aria-label="Our selection of photographer artworks"
+        ></section>
       </main>
       <footer class="footer">
         <button id="modalBtn" class="btn btn__mobile mobile">
