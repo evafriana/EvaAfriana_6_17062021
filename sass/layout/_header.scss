@@ -25,7 +25,7 @@
       margin: 2rem 0;
     }
 
-    &__item.active {
+    .active {
       background-color: $color-primary;
       color: white;
     }

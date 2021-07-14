@@ -1,4 +1,4 @@
-import { getParam, dbData, tags, checkFileExist } from "./utils.js";
+import { getParam, dbData, tags, checkFileExists } from "./utils.js";
 
 export const initPhotographer = () => {
   dbData()
@@ -199,7 +199,7 @@ const appendMedia = (medias, key = "likes") => {
       `;
 
       if (element.video) {
-        if (checkFileExist(`${path}${element.video}`)) {
+        if (checkFileExists(`${path}${element.video}`)) {
           artWork = `
           <a><video controls class="photographer__artwork__img">
             <source src="${path}${element.video}" type="video/mp4">
@@ -209,7 +209,7 @@ const appendMedia = (medias, key = "likes") => {
         `;
         }
       } else if (element.image) {
-        if (checkFileExist(`${path}${element.image}`)) {
+        if (checkFileExists(`${path}${element.image}`)) {
           artWork = `
           <a><img
             class="photographer__artwork__img"

@@ -1,5 +1,5 @@
-export const dbData = () => {
-  return fetch("./assets/data/fisheye_data.json")
+export const fetchData = async (url) => {
+  return await fetch(url)
     .then((response) => {
       return response.json();
     })
@@ -13,16 +13,7 @@ export const getParam = (param) => {
   return params.get(param);
 };
 
-const tag = (item) => {
-  return `<a href="index.html?tag=${item.toLowerCase()}"><span class="tags" aria-label="Tag">#${item}</span></a>`;
-};
-
-export const tags = (tags) => {
-  const labels = tags.map((item) => tag(item));
-  return `${labels.join("")}`;
-};
-
-export const checkFileExist = (urlToFile) => {
+export const checkFileExists = (urlToFile) => {
   const xhr = new XMLHttpRequest();
   xhr.open("HEAD", urlToFile, false);
   xhr.send();
