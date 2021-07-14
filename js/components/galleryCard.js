@@ -10,6 +10,11 @@ export const GalleryCard = ({
   price,
   tags,
 }) => {
+  // append main title on home page
+  const mainTitle = document.querySelector(".main__title");
+  mainTitle.innerHTML = "Nos photographes";
+
+  // append card to gallery on home page
   const div = document.createElement("div");
   div.innerHTML = `
       <a tabindex="0" href="photographer_page.html?id=${id}">

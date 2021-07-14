@@ -35,7 +35,7 @@ const appendData = (photographers) => {
   photographers.forEach((photographer) => {
     const div = document.createElement("div");
     div.innerHTML = `
-    <a tabindex="0" href="photographer_page.html?id=${photographer.id}">
+    <a tabindex="0" href="photographer__profile.html?id=${photographer.id}">
       <img
         class="photographers__profil"
         src="assets/images/photographers/${photographer.portrait}"

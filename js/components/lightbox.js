@@ -1,5 +1,6 @@
 import { doesFileExist } from "../utils/index.js";
 
+// lightbox modal carousel
 export class Lightbox {
   constructor({ artWork, gallery }) {
     this.element = this.buildDOM();
@@ -11,6 +12,7 @@ export class Lightbox {
     document.addEventListener("keyup", this.onKeyUp);
   }
 
+  // load media: image, video and by default if media doesn't exist
   loadMedia({ url, title, type }) {
     const artWorkTitle = `<span class="lightbox__container__info">${title}</span>`;
     const container = this.element.querySelector(".lightbox__container");
@@ -30,10 +32,12 @@ export class Lightbox {
     }
   }
 
+  // load image
   loadImage({ url, title }) {
     return `<img src="${url}" alt="${title}">`;
   }
 
+  //load video
   loadVideo({ url, title }) {
     return `<video controls alt="${title}">
     <source src="${url}" type="video/mp4">
@@ -42,6 +46,7 @@ export class Lightbox {
   </video>`;
   }
 
+  // append lightbox modal
   buildDOM() {
     const dom = document.createElement("div");
     dom.classList.add("lightbox");
@@ -63,6 +68,7 @@ export class Lightbox {
     return dom;
   }
 
+  // accessibilty for next, prev and close btn
   onKeyUp(e) {
     if (e.key === "Escape") {
       this.close();
@@ -73,6 +79,7 @@ export class Lightbox {
     }
   }
 
+  // close lightbox
   close() {
     const element = document.querySelector(".lightbox");
     element.classList.add("fadeOut");
@@ -82,6 +89,7 @@ export class Lightbox {
     document.removeEventListener("keyup", this.onKeyUp);
   }
 
+  // acces to next image lightbox
   next() {
     let i = this.gallery.findIndex(
       (artWork) => artWork === this.currentArtWork
@@ -93,6 +101,7 @@ export class Lightbox {
     this.loadMedia(this.gallery[i + 1]);
   }
 
+  // acces to prev image lightbox
   prev() {
     let i = this.gallery.findIndex(
       (artWork) => artWork === this.currentArtWork
