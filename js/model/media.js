@@ -23,6 +23,7 @@ export class Media {
     this.url = url;
   }
 
+  // display this Media in a Lightbox
   display(gallery) {
     new Lightbox({
       artWork: this,

@@ -22,7 +22,7 @@ export const tags = (tags) => {
   return `${labels.join("")}`;
 };
 
-export const checkFileExists = (urlToFile) => {
+export const doesFileExist = (urlToFile) => {
   const xhr = new XMLHttpRequest();
   xhr.open("HEAD", urlToFile, false);
   xhr.send();

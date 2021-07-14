@@ -1,3 +1,4 @@
+// fetch data from url (e.g. JSON file path)
 export const fetchData = async (url) => {
   return await fetch(url)
     .then((response) => {
@@ -8,12 +9,14 @@ export const fetchData = async (url) => {
     });
 };
 
+// get URL param
 export const getParam = (param) => {
   let params = new URLSearchParams(window.location.search);
   return params.get(param);
 };
 
-export const checkFileExists = (urlToFile) => {
+// check if a media exist from url
+export const doesFileExist = (urlToFile) => {
   const xhr = new XMLHttpRequest();
   xhr.open("HEAD", urlToFile, false);
   xhr.send();

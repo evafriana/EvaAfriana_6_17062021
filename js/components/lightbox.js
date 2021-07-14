@@ -1,4 +1,4 @@
-import { checkFileExists } from "../utils/index.js";
+import { doesFileExist } from "../utils/index.js";
 
 export class Lightbox {
   constructor({ artWork, gallery }) {
@@ -15,7 +15,7 @@ export class Lightbox {
     const artWorkTitle = `<span class="lightbox__container__info">${title}</span>`;
     const container = this.element.querySelector(".lightbox__container");
     container.innerHTML = "";
-    if (checkFileExists(url)) {
+    if (doesFileExist(url)) {
       if (type === "image") {
         container.innerHTML = this.loadImage({ url, title }) + artWorkTitle;
       }
