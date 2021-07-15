@@ -1,5 +1,6 @@
-export const dbData = () => {
-  return fetch("./assets/data/fisheye_data.json")
+// fetch data from url (e.g. JSON file path)
+export const fetchData = async (url) => {
+  return await fetch(url)
     .then((response) => {
       return response.json();
     })
@@ -8,21 +9,14 @@ export const dbData = () => {
     });
 };
 
+// get URL param
 export const getParam = (param) => {
   let params = new URLSearchParams(window.location.search);
   return params.get(param);
 };
 
-const tag = (item) => {
-  return `<a href="index.html?tag=${item.toLowerCase()}"><span class="tags" aria-label="Tag">#${item}</span></a>`;
-};
-
-export const tags = (tags) => {
-  const labels = tags.map((item) => tag(item));
-  return `${labels.join("")}`;
-};
-
-export const checkFileExist = (urlToFile) => {
+// check if a media exist from url
+export const doesFileExist = (urlToFile) => {
   const xhr = new XMLHttpRequest();
   xhr.open("HEAD", urlToFile, false);
   xhr.send();

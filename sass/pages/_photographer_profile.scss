@@ -8,6 +8,12 @@
 .photographer {
   margin: 1.5rem 0;
 
+  &__tag {
+    &__list {
+      display: flex;
+    }
+  }
+
   @media screen and (min-width: map-get($breakpoints, large-tablet)) {
     padding: 4rem 3rem;
     background-color: $color-secondary-bg;
