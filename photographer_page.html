@@ -82,10 +82,10 @@
                 <span class="close" aria-label="Close Contact Form"></span>
               </div>
               <fieldset>
-                <label for="firstname">Prénom</label><br />
+                <label id="firstname" for="first">Prénom</label><br />
                 <input
-                  id="firstname"
-                  aria-labelledby="First name"
+                  id="first"
+                  aria-labelledby="first name"
                   type="text"
                   tabindex="1"
                   minlength="2"
@@ -93,29 +93,30 @@
                 />
               </fieldset>
               <fieldset>
-                <label for="lastname">Nom</label><br />
+                <label id="lastname" for="last">Nom</label><br />
                 <input
-                  id="lastname"
-                  aria-labelledby="Last name"
+                  id="last"
+                  aria-labelledby="last name"
                   type="text"
                   tabindex="2"
                   minlength="2"
                 />
               </fieldset>
               <fieldset>
-                <label for="email">E-mail</label><br />
+                <label id="contactemail" for="email">E-mail</label><br />
                 <input
                   id="email"
-                  aria-labelledby="Email"
+                  aria-labelledby="contact email"
                   type="email"
                   tabindex="3"
                 />
               </fieldset>
               <fieldset>
-                <label for="textarea">Votre méssage</label><br />
+                <label id="yourmessage" for="textarea">Votre méssage</label
+                ><br />
                 <textarea
                   id="textarea"
-                  aria-labelledby="Your message"
+                  aria-labelledby="your message"
                   tabindex="4"
                 ></textarea>
               </fieldset>
@@ -144,13 +145,13 @@
           <span class="contact">Contactez-moi</span>
         </button>
         <div class="desktop">
-          <span class="favorite">
+          <div class="favorite">
             <div>
               <span class="total__likes"></span>
               <em class="fas fa-heart"></em>
             </div>
             <div class="photographer__price"></div>
-          </span>
+          </div>
         </div>
       </footer>
     </div>
