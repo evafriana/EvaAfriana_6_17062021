@@ -10,14 +10,15 @@ export const Profil = ({ name, city, country, tagline, portrait, tags }) => {
         </span>`;
 
   // add photographers profil img
-  document.querySelector(
-    ".photographer__profil__img"
-  ).src = `./assets/images/photographers/${portrait}`;
-
-  // add photographer's name as aria-label to photographer profil img
-  document
-    .querySelector(".photographer__profil__img")
-    .setAttribute("aria-label", `${name}`);
+  const imagePlaceholder = document.querySelector(
+    ".photographer__profil__img--span"
+  );
+  const profilImage = document.createElement("img");
+  profilImage.src = `./assets/images/photographers/${portrait}`;
+  profilImage.classList.add("photographer__profil__img");
+  profilImage.setAttribute("alt", `${name} profil image`);
+  profilImage.setAttribute("aria-label", `${name}`);
+  imagePlaceholder.parentNode.replaceChild(profilImage, imagePlaceholder);
 
   // add photographer's tags
   document.querySelector(".photographer__tag").innerHTML = `
