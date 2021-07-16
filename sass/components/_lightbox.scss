@@ -18,7 +18,7 @@
   &__next,
   &__prev {
     border: none;
-    background: url("/assets/images/arrow.svg") center center / 20px 32px
+    background: url("./assets/images/arrow.svg") center center / 20px 32px
       no-repeat;
     width: 50px;
     height: 100%;
@@ -39,7 +39,7 @@
     width: 20px;
     height: 32px;
     border: none;
-    background: url("/assets/images/cross.svg") center center / 100% 100%
+    background: url("./assets/images/cross.svg") center center / 100% 100%
       no-repeat transparent;
     position: fixed;
     top: 20px;
