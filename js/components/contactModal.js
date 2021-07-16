@@ -1,6 +1,6 @@
 export const ContactModal = (photographer) => {
   const modal = document.getElementById("modal");
-  const modalBtn = document.querySelectorAll("#modalBtn");
+  const modalBtn = document.querySelectorAll(".modalBtn");
   const modalClose = document.querySelectorAll(".close");
 
   modal.setAttribute("aria-labelledby", `Contact me ${photographer.name}`);
