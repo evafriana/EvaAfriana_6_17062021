@@ -1,5 +1,5 @@
 import { getParam, fetchData } from "../utils/index.js";
-import { Photographer } from "../model/photographer.js";
+import { photographerFactory } from "../model/photographer.js";
 import { GalleryCard } from "../components/galleryCard.js";
 import { Tags } from "../components/tags.js";
 import { handleGotocontent } from "../components/gotoContent.js";
@@ -20,7 +20,7 @@ export const initHome = () => {
       return true;
     })
     .map((photographer) => {
-      return new Photographer(photographer);
+      return photographerFactory(photographer);
     });
 
   // list of tags for nav tags header

@@ -1,6 +1,6 @@
 import { getParam, fetchData } from "../utils/index.js";
-import { Photographer } from "../model/photographer.js";
-import { Media } from "../model/media.js";
+import { photographerFactory } from "../model/photographer.js";
+import { mediaFactory } from "../model/media.js";
 import { Profil } from "../components/profil.js";
 import { GalleryArtworks } from "../components/galleryArtworks.js";
 import { ContactModal } from "../components/contactModal.js";
@@ -32,11 +32,11 @@ export const initPhotographer = () => {
       const url = image
         ? `assets/images/medias/${image}`
         : `assets/images/medias/${video}`;
-      return new Media({ ...artWork, type, url });
+      return mediaFactory({ ...artWork, type, url });
     });
 
   // create Photographer with media
-  const photographer = new Photographer({
+  const photographer = photographerFactory({
     ...photographerProfil,
     media: mediaList,
   });
