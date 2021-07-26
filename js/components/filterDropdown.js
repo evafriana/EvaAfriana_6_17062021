@@ -37,7 +37,7 @@ export const FilterDropdown = (photographer) => {
         li.classList.add("toggle__border");
         toggleList.appendChild(li);
 
-        li.addEventListener("click", (event) => {
+        li.addEventListener("click", () => {
           toggleButton.textContent = value;
           toggleList.classList.remove("open");
           toggleButton.classList.toggle("arrow-down");
