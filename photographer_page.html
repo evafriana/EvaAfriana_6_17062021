@@ -36,7 +36,7 @@
             >
               <span class="contact">Contactez-moi</span>
             </button>
-            <span class="photographer__profil__img--span"></span>
+            <span class="photographer__profil__img--span" tabindex="0"></span>
             <!-- <img
               alt="photographer profil image"
               class="photographer__profil__img"
@@ -68,13 +68,16 @@
         <div
           id="modal"
           class="modal"
-          aria-hidden="true"
+          aria-modal="true"
+          tabindex="0"
           role="dialog"
           aria-describedby="modalTitle"
         >
           <!-- Modal content -->
           <div class="modal__content">
             <form
+              tabindex="0"
+              name="reserve"
               action="photographer_page.html"
               method="post"
               onsubmit="return false"
@@ -100,7 +103,7 @@
                   id="last"
                   aria-labelledby="last-name"
                   type="text"
-                  tabindex="2"
+                  tabindex="1"
                   minlength="2"
                 />
               </fieldset>
@@ -110,7 +113,7 @@
                   id="email"
                   aria-labelledby="contact-email"
                   type="text"
-                  tabindex="3"
+                  tabindex="1"
                 />
               </fieldset>
               <fieldset>
@@ -120,7 +123,7 @@
                   id="textarea"
                   type="text"
                   aria-labelledby="your-message"
-                  tabindex="4"
+                  tabindex="1"
                 ></textarea>
               </fieldset>
                 <input
@@ -147,10 +150,10 @@
         <div class="desktop">
           <div class="favorite">
             <div>
-              <span class="total__likes"></span>
+              <span class="total__likes" tabindex="0"></span>
               <em class="fas fa-heart"></em>
             </div>
-            <div class="photographer__price"></div>
+            <div class="photographer__price" tabindex="0"></div>
           </div>
         </div>
       </footer>

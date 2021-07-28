@@ -50,10 +50,10 @@ export class Lightbox {
   buildDOM() {
     const dom = document.createElement("div");
     dom.classList.add("lightbox");
-    dom.innerHTML = `<button class="lightbox__close" aria-label="Close dialog"></button>
+    dom.innerHTML = `<button class="lightbox__close" aria-label="Close dialog" tabindex="0"></button>
       <button class="lightbox__next" aria-label="Next image"></button>
       <button class="lightbox__prev" aria-label="Previous image"></button>
-      <div class="lightbox__container" aria-label="image closeup view">
+      <div class="lightbox__container" aria-label="image closeup view" tabindex="0">
       </div>`;
     dom.querySelector(".lightbox__close").addEventListener("click", () => {
       this.close();
