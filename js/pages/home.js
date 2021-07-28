@@ -4,11 +4,11 @@ import { GalleryCard } from "../components/galleryCard.js";
 import { Tags } from "../components/tags.js";
 import { handleGotocontent } from "../components/gotoContent.js";
 
-// get data
-const { photographers } = await fetchData("./assets/data/fisheye_data.json");
-
 // init home page
-export const initHome = () => {
+export const initHome = async () => {
+  // get data
+  const { photographers } = await fetchData("./assets/data/fisheye_data.json");
+
   // get photographers to show
   const photographersList = photographers
     // filter photographers if there is a tag param
