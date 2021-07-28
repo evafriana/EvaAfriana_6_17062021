@@ -57,7 +57,6 @@ export const GalleryArtworks = (media) => {
 
     lightbox.addEventListener("click", (e) => {
       e.preventDefault();
-      console.log(media);
       element.display(media);
     });
 

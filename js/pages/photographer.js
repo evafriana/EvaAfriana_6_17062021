@@ -6,16 +6,16 @@ import { GalleryArtworks } from "../components/galleryArtworks.js";
 import { ContactModal } from "../components/contactModal.js";
 import { FilterDropdown } from "../components/filterDropdown.js";
 
-// get data
-const { photographers, media } = await fetchData(
-  "./assets/data/fisheye_data.json"
-);
-
-// get photographer id from URL param
-const photographerId = parseInt(getParam("id"));
-
 // init photographer page
-export const initPhotographer = () => {
+export const initPhotographer = async () => {
+  // get data
+  const { photographers, media } = await fetchData(
+    "./assets/data/fisheye_data.json"
+  );
+
+  // get photographer id from URL param
+  const photographerId = parseInt(getParam("id"));
+
   // find photographer by id
   const photographerProfil = photographers.find((photographer) => {
     return photographer.id === photographerId;
