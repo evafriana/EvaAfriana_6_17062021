@@ -1,0 +1,63 @@
+.tags {
+  border: 1px solid lighten($color-text, 50%);
+  padding: 0 6px;
+  border-radius: 25px;
+  line-height: 1.6;
+  color: $color-primary;
+  margin: 3px;
+}
+
+.btn {
+  z-index: 1;
+  cursor: pointer;
+  @include btn-primary;
+
+  &__profil {
+    @media screen and (min-width: map-get($breakpoints, tablet)) {
+      width: 180px;
+      height: 60px;
+      margin-left: -5vw;
+      margin-top: 0.5rem;
+    }
+
+    @media screen and (min-width: map-get($breakpoints, desktop)) {
+      margin-left: -15rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  &__mobile {
+    padding: 1rem;
+  }
+
+  &__modal {
+    border-style: none;
+    padding: 0.7rem 1.5rem;
+  }
+}
+
+.trier {
+  span {
+    display: flex;
+    position: relative;
+    width: 18rem;
+  }
+
+  a,
+  ul {
+    color: #fff;
+  }
+
+  .arrow-up::after {
+    content: "▲";
+    right: 20px;
+    position: absolute;
+    top: 12px;
+  }
+
+  .arrow-down::after {
+    content: "▼";
+    right: 20px;
+    position: absolute;
+  }
+}
