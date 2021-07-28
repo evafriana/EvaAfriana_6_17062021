@@ -2,9 +2,7 @@ export const ContactModal = (photographer) => {
   const modal = document.getElementById("modal");
   const modalBtn = document.querySelectorAll(".modalBtn");
   const modalClose = document.querySelectorAll(".close");
-  const modalInput = document.querySelectorAll(
-    "input[type='text'], textarea[type='text']"
-  );
+  const modalInput = document.querySelectorAll("input[type='text'], textarea");
   const form = document.querySelector("form");
 
   modal.setAttribute("aria-labelledby", `Contact me ${photographer.name}`);
